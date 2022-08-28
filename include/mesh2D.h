@@ -33,16 +33,3 @@ public:
 	void draw();
 	void destroy();
 };
-const std::vector<Vertex2D> Mesh2D::SQUARE_VERT
-{
-	Vertex2D{glm::vec2(-0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
-	Vertex2D{glm::vec2(-0.5f,  0.5f), glm::vec2(0.0f, 1.0f)},
-	Vertex2D{glm::vec2( 0.5f,  0.5f), glm::vec2(1.0f, 1.0f)},
-	Vertex2D{glm::vec2( 0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
-};
-
-const std::vector<GLuint> Mesh2D::SQUARE_IND
-{
-	0, 1, 2,
-	0, 2, 3,
-};

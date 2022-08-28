@@ -2,7 +2,7 @@
 
 void Transform::translate(const glm::vec2 &v)
 {
-    position += glm::vec2(glm::dot(rotation[0], v), glm::dot(rotation[1], v));
+    position += glm::vec2(glm::dot(glm::vec2(rotation[0].x, rotation[1].x), v), glm::dot(glm::vec2(rotation[0].y, rotation[1].y), v));
 }
 
 void Transform::rotate(float angle)

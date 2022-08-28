@@ -2,6 +2,20 @@
 
 #include <iostream>
 
+const std::vector<Vertex2D> Mesh2D::SQUARE_VERT
+{
+	Vertex2D{glm::vec2(-0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
+	Vertex2D{glm::vec2(-0.5f,  0.5f), glm::vec2(0.0f, 1.0f)},
+	Vertex2D{glm::vec2( 0.5f,  0.5f), glm::vec2(1.0f, 1.0f)},
+	Vertex2D{glm::vec2( 0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
+};
+
+const std::vector<GLuint> Mesh2D::SQUARE_IND
+{
+	0, 1, 2,
+	0, 2, 3,
+};
+
 std::vector<Vertex2D> Mesh2D::mulVerts(const std::vector<Vertex2D> &v, glm::vec2 m)
 {
 	std::vector<Vertex2D> ret(v.size());
@@ -37,8 +51,6 @@ void Mesh2D::load(const std::vector<Vertex2D> &v, const std::vector<GLuint> &i)
 
 void Mesh2D::draw()
 {
-	// texture.use(GL_TEXTURE0);
-
 	vao.bind();
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

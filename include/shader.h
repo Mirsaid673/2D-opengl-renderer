@@ -17,12 +17,20 @@ private:
 	GLuint ID;
 
 public:
+	static void initDefaultShader(const char *v, const char *f) { default_shader.load(v, f); }
+	static Shader default_shader;
+
+	Shader() {}
 	Shader(const char *vertexFile, const char *fragmentFile);
+
+	~Shader() {destroy();}
+
+	void load(const char *vertexFile, const char *fragmentFile);
 	void use();
 	void destroy();
 	operator GLuint() { return ID; }
 
-	template<typename T>
+	template <typename T>
 	void setScalar(const char *name, T value);
 
 	void setVec2(const char *name, float value1, float value2);
@@ -42,7 +50,7 @@ public:
 	void setMat4(const char *name, float *m);
 	void setMat4(const char *name, const glm::mat4 &m);
 
-	void setCamera(const Camera2D& c);
+	void setCamera(const Camera2D &c);
 
 private:
 	void compileErrors(unsigned int shader, const char *type);

@@ -2,49 +2,22 @@
 
 #include "stb_image.h"
 
+#include <iostream>
+
 Texture::Texture(const char *file, GLenum filter)
 {
-	stbi_set_flip_vertically_on_load(true);
-	int num_channel;
-	unsigned char *texture = stbi_load(file, &width, &height, &num_channel, 0);
-
-	GLuint tex;
-	glGenTextures(1, &ID);
-	glBindTexture(GL_TEXTURE_2D, ID);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	GLenum format;
-	switch (num_channel)
-	{
-	case 4:
-		format = GL_RGBA;
-		break;
-	case 3:
-		format = GL_RGB;
-		break;
-	case 1:
-		format = GL_RED;
-		break;
-	default:
-		glDeleteTextures(1, &ID);
-		return;
-	}
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, GL_UNSIGNED_BYTE, texture);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(texture);
+	load(file, filter);
 }
 
 void Texture::load(const char *file, GLenum filter)
 {
 	int num_channel;
+	stbi_set_flip_vertically_on_load(true);
 	unsigned char *texture = stbi_load(file, &width, &height, &num_channel, 0);
+	if(texture == nullptr)
+	{
+		std::cerr << "failed to load texture: " << file << std::endl;
+	}
 
 	GLuint tex;
 	glGenTextures(1, &ID);

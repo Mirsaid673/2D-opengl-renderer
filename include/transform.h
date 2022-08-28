@@ -16,7 +16,7 @@ public:
 
     float getRotation();
 
-    glm::mat3 getMatrix() const { return glm::mat3(glm::vec3(rotation[0], 0.0f), glm::vec3(rotation[1], 0.0f), glm::vec3(position, 0.0f)); }
+    glm::mat4 getMatrix() const { return glm::mat4(glm::vec4(rotation[0], 0, 0), glm::vec4(rotation[1], 0, 0), glm::vec4(0, 0, 1, 0), glm::vec4(position, 0, 1)); }
 
-    Transform() : rotation(1.0f) {}
+    Transform() : rotation(glm::mat3(1.0f)) {}
 };

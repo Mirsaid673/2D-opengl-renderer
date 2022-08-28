@@ -10,7 +10,7 @@ private:
 	int height;
 
 public:
-	Texture() {};
+	Texture() {}
 	Texture(const char *file, GLenum filter = GL_LINEAR);
 
 	void load(const char *file, GLenum filter = GL_LINEAR);
@@ -18,4 +18,7 @@ public:
 	void unbind();
 	void use(GLenum unit = GL_TEXTURE0);
 	void destroy();
+
+	int getWidth() const {return width;}
+	int getHeight() const {return height;}
 };
