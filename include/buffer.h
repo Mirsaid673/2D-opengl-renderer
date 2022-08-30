@@ -9,8 +9,9 @@ private:
 	GLenum type;
 
 public:
-	Buffer() { glGenBuffers(1, &ID); }
+	Buffer() {}
 	Buffer(GLenum target, GLvoid *arr, GLuint size);
+	void create() {glGenBuffers(1, &ID);}
 	void set_data(GLenum target, GLvoid *arr, GLuint size);
 	void bind();
 	void unbind();

@@ -2,7 +2,11 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-void Camera2D::othographic(float left, float right, float bottom, float top, float near, float far)
+void Camera2D::update()
 {
-	projection = glm::orthoLH(left, right, bottom, top, near, far);
+	float w = width * scale / 2.0f;
+	float h = height * scale / 2.0f;
+	projection = glm::orthoLH(-w, w,
+							  -h, h,
+							  -1.0f, 1.0f);
 }

@@ -3,15 +3,16 @@ cmake_minimum_required(VERSION 3.5)
 
 set(PROJECT_NAME GameEngine)
 set(EXECUTABLE out)
-set(CXX_STANDARD 17)
+set(CXX_STANDARD 14)
 
 set(LIBRARIES GL GLEW glfw)
-set(INCLUDE_DIRECTORY 	${CMAKE_SOURCE_DIR}/include resource/libs/stb_image/)
+set(INCLUDE_DIRECTORY ${CMAKE_SOURCE_DIR}/include)
 file(GLOB SOURCES "src/*.cpp")
 file(GLOB INCLUDE "include/*.h")
+file(GLOB LIBS_INCLUDE_DIRECTORY "resource/libs/*")
 file(GLOB LIB_SOURCES "resource/libs/*/*.cpp")
 
-include_directories(${INCLUDE_DIRECTORY})
+include_directories(${INCLUDE_DIRECTORY} ${LIBS_INCLUDE_DIRECTORY})
 
 project(${PROJECT_NAME})
 

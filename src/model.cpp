@@ -2,23 +2,21 @@
 
 Model::Model(const char *path, const LoadConfguration &lc) : shader(&Shader::default_shader)
 {
-	texture.load(path, lc.filter);
-
-	std::vector<Vertex2D> v{
-		Vertex2D{glm::vec2(lc.left_top.x, lc.right_bottom.y), glm::vec2(0, 0)},
-		Vertex2D{glm::vec2(lc.left_top.x, lc.left_top.y), glm::vec2(0, 1)},
-		Vertex2D{glm::vec2(lc.right_bottom.x, lc.left_top.y), glm::vec2(1, 1)},
-		Vertex2D{glm::vec2(lc.right_bottom.x, lc.right_bottom.y), glm::vec2(1, 0)},
-	};
-
-	std::vector<GLuint> i{
-		0, 1, 2,
-		0, 2, 3,	
-	};
-	mesh.load(v, i);
+	load(path, lc);
 }
 
 Model::Model(const char *path) : shader(&Shader::default_shader)
+{
+	load(path);
+}
+
+void Model::load(const Mesh2D &m, const Texture &t)
+{
+	mesh = m;
+	texture = t;
+}
+
+void Model::load(const char *path)
 {
 	texture.load(path);
 
@@ -28,7 +26,7 @@ Model::Model(const char *path) : shader(&Shader::default_shader)
 	int w = texture.getWidth();
 	int h = texture.getHeight();
 
-	if(w < h)
+	if (w < h)
 	{
 		float aspect = (float)h / ((float)w * 2);
 		left_top.x = -0.5f;
@@ -53,25 +51,51 @@ Model::Model(const char *path) : shader(&Shader::default_shader)
 	};
 
 	std::vector<GLuint> i{
-		0, 1, 2,
-		0, 2, 3,	
+		0,
+		1,
+		2,
+		0,
+		2,
+		3,
 	};
 	mesh.load(v, i);
+}
+
+void Model::load(const char *path, const LoadConfguration &lc)
+{
+	texture.load(path, lc.filter);
+
+	std::vector<Vertex2D> v{
+		Vertex2D{glm::vec2(lc.left_top.x, lc.right_bottom.y), glm::vec2(0, 0)},
+		Vertex2D{glm::vec2(lc.left_top.x, lc.left_top.y), glm::vec2(0, 1)},
+		Vertex2D{glm::vec2(lc.right_bottom.x, lc.left_top.y), glm::vec2(1, 1)},
+		Vertex2D{glm::vec2(lc.right_bottom.x, lc.right_bottom.y), glm::vec2(1, 0)},
+	};
+
+	std::vector<GLuint> i{
+		0,
+		1,
+		2,
+		0,
+		2,
+		3,
+	};
+	mesh.load(v, i);
+}
+
+void Model::draw()
+{
+	shader->use();
+	shader->setMat3x2("m", transform.getMatrix());
+	shader->setScalar("tex", 0);
+
+	texture.use(GL_TEXTURE0);
+
+	mesh.draw();
 }
 
 Model::~Model()
 {
 	texture.destroy();
 	mesh.destroy();
-}
-
-void Model::draw()
-{
-	shader->use();
-	shader->setMat4("m", transform.getMatrix());
-
-	shader->setScalar("tex", 0);
-	texture.use(GL_TEXTURE0);
-
-	mesh.draw();
 }

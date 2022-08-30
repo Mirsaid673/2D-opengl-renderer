@@ -36,6 +36,10 @@ void Mesh2D::load(const std::vector<Vertex2D> &v, const std::vector<GLuint> &i)
 {
 	vertices = v;
 	indices = i;
+	vao.create();
+	vbo.create();
+	ebo.create();
+
 	vao.bind();
 
 	vbo.set_data(GL_ARRAY_BUFFER, vertices.data(), vertices.size() * sizeof(Vertex2D));

@@ -2,10 +2,10 @@
 
 Buffer::Buffer(GLenum target, GLvoid *arr, GLuint size)
 {
+	create();
+	
 	type = target;
-	glGenBuffers(1, &ID);
 	glBindBuffer(type, ID);
-
 	glBufferData(type, size, arr, GL_STATIC_DRAW);
 }
 

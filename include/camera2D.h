@@ -9,10 +9,13 @@ private:
 
 public:
 	Transform transform;
+	float width;
+	float height;
+	float scale = 1.0f;
 
 	Camera2D() : projection(1.0f) {}
 
-	void othographic(float left, float right, float bottom, float top, float near = -1.0f, float far = 1.0f);
+	void update();
 
 	const glm::mat4 &getProjection() const { return projection; }
 };

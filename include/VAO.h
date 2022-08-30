@@ -8,7 +8,7 @@ private:
 	GLuint ID;
 
 public:
-	VAO();
+	void create();
 	void bind();
 	void unbind();
 	void destroy();

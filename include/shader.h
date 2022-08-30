@@ -26,32 +26,38 @@ public:
 	~Shader() {destroy();}
 
 	void load(const char *vertexFile, const char *fragmentFile);
-	void use();
-	void destroy();
-	operator GLuint() { return ID; }
+	void use() const;
+	void destroy() const;
+	operator GLuint() const { return ID; }
 
 	template <typename T>
-	void setScalar(const char *name, T value);
+	void setScalar(const char *name, T value) const;
 
-	void setVec2(const char *name, float value1, float value2);
-	void setVec2(const char *name, float *values);
-	void setVec2(const char *name, const glm::vec2 &v);
+	void setVec2(const char *name, float value1, float value2) const;
+	void setVec2(const char *name, float *values) const;
+	void setVec2(const char *name, const glm::vec2 &v) const;
 
-	void setVec3(const char *name, float value1, float value2, float value3);
-	void setVec3(const char *name, float *values);
-	void setVec3(const char *name, const glm::vec3 &v);
+	void setVec3(const char *name, float value1, float value2, float value3) const;
+	void setVec3(const char *name, float *values) const;
+	void setVec3(const char *name, const glm::vec3 &v) const;
 
-	void setMat2(const char *name, float *m);
-	void setMat2(const char *name, const glm::mat2 &m);
+	void setMat2(const char *name, float *m) const;
+	void setMat2(const char *name, const glm::mat2 &m) const;
 
-	void setMat3(const char *name, float *m);
-	void setMat3(const char *name, const glm::mat3 &m);
+	void setMat2x3(const char *name, float *m) const;
+	void setMat2x3(const char *name, const glm::mat2x3 &m) const;
 
-	void setMat4(const char *name, float *m);
-	void setMat4(const char *name, const glm::mat4 &m);
+	void setMat3x2(const char *name, float *m) const;
+	void setMat3x2(const char *name, const glm::mat3x2 &m) const;
 
-	void setCamera(const Camera2D &c);
+	void setMat3(const char *name, float *m) const;
+	void setMat3(const char *name, const glm::mat3 &m) const;
+
+	void setMat4(const char *name, float *m) const;
+	void setMat4(const char *name, const glm::mat4 &m) const;
+
+	void setCamera(const Camera2D &c) const;
 
 private:
-	void compileErrors(unsigned int shader, const char *type);
+	void compileErrors(unsigned int shader, const char *type) const;
 };
