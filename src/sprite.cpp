@@ -1,22 +1,22 @@
-#include "model.h"
+#include "sprite.h"
 
-Model::Model(const char *path, const LoadConfguration &lc) : shader(&Shader::default_shader)
+Sprite::Sprite(const char *path, const LoadConfguration &lc)
 {
 	load(path, lc);
 }
 
-Model::Model(const char *path) : shader(&Shader::default_shader)
+Sprite::Sprite(const char *path)
 {
 	load(path);
 }
 
-void Model::load(const Mesh2D &m, const Texture &t)
+void Sprite::load(const Mesh2D &m, const Texture &t)
 {
 	mesh = m;
 	texture = t;
 }
 
-void Model::load(const char *path)
+void Sprite::load(const char *path)
 {
 	texture.load(path);
 
@@ -61,7 +61,7 @@ void Model::load(const char *path)
 	mesh.load(v, i);
 }
 
-void Model::load(const char *path, const LoadConfguration &lc)
+void Sprite::load(const char *path, const LoadConfguration &lc)
 {
 	texture.load(path, lc.filter);
 
@@ -83,18 +83,13 @@ void Model::load(const char *path, const LoadConfguration &lc)
 	mesh.load(v, i);
 }
 
-void Model::draw()
+void Sprite::draw() const
 {
-	shader->use();
-	shader->setMat3x2("m", transform.getMatrix());
-	shader->setScalar("tex", 0);
-
 	texture.use(GL_TEXTURE0);
-
 	mesh.draw();
 }
 
-Model::~Model()
+Sprite::~Sprite()
 {
 	texture.destroy();
 	mesh.destroy();

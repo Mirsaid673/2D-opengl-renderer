@@ -3,7 +3,7 @@
 #include "window.h"
 #include "mesh2D.h"
 #include "shader.h"
-#include "model.h"
+#include "sprite.h"
 #include "camera2D.h"
 #include "input.h"
 #include "gui.h"
@@ -13,16 +13,19 @@ class Application
 public:
     int run();
 
-    void init();
-    void update();
+    void app_init();
+    void app_update();
 
-    void cleanup();
+    virtual void init() {};
+    virtual void update() = 0;
+    virtual void draw() = 0;
+    virtual void cleanup(){};
 
-private:
+    void app_cleanup();
+
+protected:
     Window main_window;
-    Camera2D main_camera;
-
-    Model m;
+    Camera2D camera;
 
     bool run_app = true;
 };

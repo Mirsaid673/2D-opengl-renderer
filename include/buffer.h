@@ -13,9 +13,9 @@ public:
 	Buffer(GLenum target, GLvoid *arr, GLuint size);
 	void create() {glGenBuffers(1, &ID);}
 	void set_data(GLenum target, GLvoid *arr, GLuint size);
-	void bind();
-	void unbind();
-	void destroy();
+	void bind() const;
+	void unbind() const;
+	void destroy() const;
 	GLenum getTarget() const {return type;}
-	operator GLuint() { return ID; }
+	operator GLuint() const { return ID; }
 };

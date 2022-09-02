@@ -9,8 +9,8 @@ private:
 
 public:
 	void create();
-	void bind();
-	void unbind();
-	void destroy();
-	void linkAttrib(GLuint layout, GLuint num_components, GLsizeiptr stride, GLvoid *offset);
+	void bind() const;
+	void unbind() const;
+	void destroy() const;
+	void linkAttrib(GLuint layout, GLuint num_components, GLsizeiptr stride, GLvoid *offset) const;
 };

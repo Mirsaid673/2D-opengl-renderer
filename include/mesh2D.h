@@ -30,6 +30,6 @@ public:
 	Mesh2D() {}
 	Mesh2D(const std::vector<Vertex2D> &v, const std::vector<GLuint> &i);
 	void load(const std::vector<Vertex2D> &v, const std::vector<GLuint> &i);
-	void draw();
-	void destroy();
+	void draw() const;
+	void destroy() const;
 };

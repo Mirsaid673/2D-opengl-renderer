@@ -3,7 +3,7 @@
 Buffer::Buffer(GLenum target, GLvoid *arr, GLuint size)
 {
 	create();
-	
+
 	type = target;
 	glBindBuffer(type, ID);
 	glBufferData(type, size, arr, GL_STATIC_DRAW);
@@ -16,17 +16,17 @@ void Buffer::set_data(GLenum target, GLvoid *arr, GLuint size)
 	glBufferData(type, size, arr, GL_STATIC_DRAW);
 }
 
-void Buffer::bind()
+void Buffer::bind() const
 {
 	glBindBuffer(type, ID);
 }
 
-void Buffer::unbind()
+void Buffer::unbind() const
 {
 	glBindBuffer(type, 0);
 }
 
-void Buffer::destroy()
+void Buffer::destroy() const
 {
 	glDeleteVertexArrays(1, &ID);
 }

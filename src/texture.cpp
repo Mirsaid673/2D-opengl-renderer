@@ -18,8 +18,18 @@ void Texture::load(const char *file, GLenum filter)
 	{
 		std::cerr << "failed to load texture: " << file << std::endl;
 	}
+	load(texture, width, height, num_channel, GL_RGBA, filter);
 
-	GLuint tex;
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	stbi_image_free(texture);
+}
+
+void Texture::load(const unsigned char *data, int w, int h, int num_channel, GLint internalformat, GLenum filter)
+{
+	width = w;
+	height = h;
+
 	glGenTextures(1, &ID);
 	glBindTexture(GL_TEXTURE_2D, ID);
 
@@ -46,29 +56,26 @@ void Texture::load(const char *file, GLenum filter)
 		return;
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, GL_UNSIGNED_BYTE, texture);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, internalformat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 }
 
-void Texture::bind()
+void Texture::bind() const
 {
 	glBindTexture(GL_TEXTURE_2D, ID);
 }
 
-void Texture::unbind()
+void Texture::unbind() const
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture::use(GLenum unit)
+void Texture::use(GLenum unit) const
 {
 	glActiveTexture(unit);
 	glBindTexture(GL_TEXTURE_2D, ID);
 }
 
-void Texture::destroy()
+void Texture::destroy() const
 {
 	glDeleteTextures(1, &ID);
 }
