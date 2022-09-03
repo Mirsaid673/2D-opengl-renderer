@@ -71,6 +71,8 @@ void Application::app_update()
     camera.width = w;
     camera.height = h;
     camera.update();
+
+    Input::update();
 }
 
 void Application::app_cleanup()

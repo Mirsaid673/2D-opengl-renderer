@@ -10,6 +10,28 @@ Sprite::Sprite(const char *path)
 	load(path);
 }
 
+void Sprite::load(const LoadConfguration &lc, const Texture &t)
+{
+	texture = t;
+	
+	std::vector<Vertex2D> v{
+		Vertex2D{glm::vec2(lc.left_top.x, lc.right_bottom.y), glm::vec2(0, 0)},
+		Vertex2D{glm::vec2(lc.left_top.x, lc.left_top.y), glm::vec2(0, 1)},
+		Vertex2D{glm::vec2(lc.right_bottom.x, lc.left_top.y), glm::vec2(1, 1)},
+		Vertex2D{glm::vec2(lc.right_bottom.x, lc.right_bottom.y), glm::vec2(1, 0)},
+	};
+
+	std::vector<GLuint> i{
+		0,
+		1,
+		2,
+		0,
+		2,
+		3,
+	};
+	mesh.load(v, i);
+}
+
 void Sprite::load(const Mesh2D &m, const Texture &t)
 {
 	mesh = m;

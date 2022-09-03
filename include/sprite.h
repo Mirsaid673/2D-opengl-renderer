@@ -27,6 +27,7 @@ public:
 	Sprite(const char *path);
 
 	void load(const Mesh2D &m, const Texture &t);
+	void load(const LoadConfguration &lc, const Texture &t);
 	void load(const char *path, const LoadConfguration &lc);
 	void load(const char *path);
 

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "my_game.h"
+#include "physics_game.h"
 
 int main()
 {

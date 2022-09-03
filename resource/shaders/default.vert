@@ -11,10 +11,12 @@ uniform mat4 p;
 
 mat3x2 get_camear_space(mat3x2 camera, mat3x2 m)
 {
-    mat2 rot = mat2(camera[0][0], -camera[0][1], -camera[1][0], camera[1][1]) * mat2(m);
     vec2 og = m[2];
-    vec2 t = vec2(dot(vec2(rot[0].x, rot[1].x), og), dot(vec2(rot[0].y, rot[1].y), og)) - camera[2];
-    return mat3x2(rot[0], rot[1], t);
+    vec2 c_x = vec2(camera[0].x, camera[1].x);
+    vec2 c_y = vec2(camera[0].y, camera[1].y);
+    vec2 pos = vec2(dot(c_x, og), dot(c_y, og)) - camera[2];
+    mat2 rot = mat2(camera[0].x, -camera[0].y, -camera[1].x, camera[1].y) * mat2(m);
+    return mat3x2(rot[0], rot[1], pos);
 }
 
 void main() 
